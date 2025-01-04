@@ -1,2 +1,2 @@
-import notebookApp from "./app";
-notebookApp();
+import App from "./app";
+App();

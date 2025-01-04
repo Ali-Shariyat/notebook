@@ -1,13 +1,12 @@
-import { type Interface } from "readline";
+import readline from "./readline";
 
-interface PropsFace {
+interface GetUserInputRaw {
   label: string;
-  close?: boolean;
-  rl: Interface;
 }
-export default async function getUserInput({ label, rl }: PropsFace) {
+
+export default async function getUserInput({ label }: GetUserInputRaw) {
   return await new Promise<string>((resolve) => {
-    rl.question(label, (answer) => {
+    readline.question(label, (answer: string) => {
       if (answer) {
         resolve(answer);
       }
