@@ -1,10 +1,10 @@
-import getUserInput from "./getUserInput";
-import { readUserDataFromFile } from "./readline";
 import { UserInputRow } from "@/global/types";
 import promptForAdditionalUser from "./promptForAdditionalUser";
 import { writeFileSync } from "fs";
 import { validatePhoneNumber } from "../global/validations";
 import messages from "../global/messages";
+import readUserDataFromFile from "./readfile";
+import { getUserInput } from "./readline";
 
 const users: UserInputRow[] = readUserDataFromFile();
 
