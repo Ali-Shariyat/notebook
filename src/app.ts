@@ -1,12 +1,13 @@
+import messages from "./global/messages";
 import getUserInput from "./helper/getUserInput";
 import saveUserInput from "./helper/saveUserInput";
 
 export default async function App() {
   const name = await getUserInput({
-    label: "enter your name:",
+    label: messages.enterName,
   });
   const phone = await getUserInput({
-    label: "enter your phone number:",
+    label: messages.enterPhone,
   });
 
   saveUserInput({ name, phone });
