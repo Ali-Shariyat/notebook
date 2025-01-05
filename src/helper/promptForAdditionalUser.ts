@@ -1,5 +1,5 @@
 import messages from "../global/messages";
-import notebookApp from "../app";
+import App from "../app";
 import getUserInput from "./getUserInput";
 import readline from "./readline";
 
@@ -8,7 +8,7 @@ export default async function promptForAdditionalUser() {
     label: messages.anotherUser,
   });
   if (answer.toLowerCase() === "y" || answer.toLowerCase() === "yes") {
-    notebookApp();
+    App();
   } else {
     readline.close();
   }
