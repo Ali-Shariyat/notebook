@@ -1,29 +1,24 @@
-import * as fs from "fs";
-import promptForAdditionalUser from "./promptForAdditionalUser";
-import readUserDataFromFile from "./readUserDataFromFile";
 import getUserInput from "./getUserInput";
+import { readUserDataFromFile } from "./readline";
+import { UserInputRow } from "@/types";
+import promptForAdditionalUser from "./promptForAdditionalUser";
+import { writeFileSync } from "fs";
 
-interface SaveUserInputRaw {
-  name: string;
-  phone: string;
-}
-
-const users = readUserDataFromFile<SaveUserInputRaw>();
-
-const checkPhoneExist = (phone: string): boolean =>
-  users.some((user) => user.phone === phone);
-
-const writeUserDataToFile = (user: SaveUserInputRaw): void => {
+const users = readUserDataFromFile<UserInputRow>();
+const writeUserDataToFile = (user: UserInputRow): void => {
   users.push(user);
   try {
-    fs.writeFileSync("user.json", JSON.stringify(users, null, 2));
+    writeFileSync("user.json", JSON.stringify(users, null, 2));
     promptForAdditionalUser();
   } catch (error) {
     console.error("Error writing to file", error);
   }
 };
 
-const handlePhoneExistence = async (user: SaveUserInputRaw): Promise<void> => {
+const checkPhoneExist = (phone: string): boolean =>
+  users.some((user) => user.phone === phone);
+
+const handlePhoneExistence = async (user: UserInputRow): Promise<void> => {
   if (checkPhoneExist(user.phone)) {
     console.log("Phone number already exists");
     const newPhone = await getUserInput({
@@ -35,8 +30,6 @@ const handlePhoneExistence = async (user: SaveUserInputRaw): Promise<void> => {
   }
 };
 
-export default async function saveUserInput(
-  user: SaveUserInputRaw
-): Promise<void> {
+export default async function saveUserInput(user: UserInputRow): Promise<void> {
   await handlePhoneExistence(user);
 }
