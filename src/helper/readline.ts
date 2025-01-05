@@ -6,10 +6,10 @@ const readline = createInterface({
   output: process.stdout,
 });
 
-export function readUserDataFromFile<T>(): T[] {
+export function readUserDataFromFile() {
   try {
     const fileContent = readFileSync("user.json", "utf8");
-    return fileContent ? (JSON.parse(fileContent) as T[]) : [];
+    return fileContent ? JSON.parse(fileContent) : [];
   } catch (readErr) {
     return [];
   }

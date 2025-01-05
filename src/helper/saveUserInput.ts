@@ -1,10 +1,13 @@
 import getUserInput from "./getUserInput";
 import { readUserDataFromFile } from "./readline";
-import { UserInputRow } from "@/types";
+import { UserInputRow } from "@/global/types";
 import promptForAdditionalUser from "./promptForAdditionalUser";
 import { writeFileSync } from "fs";
+import { validatePhoneNumber } from "../global/validations";
+import messages from "../global/messages";
 
-const users = readUserDataFromFile<UserInputRow>();
+const users: UserInputRow[] = readUserDataFromFile();
+
 const writeUserDataToFile = (user: UserInputRow): void => {
   users.push(user);
   try {
@@ -19,12 +22,17 @@ const checkPhoneExist = (phone: string): boolean =>
   users.some((user) => user.phone === phone);
 
 const handlePhoneExistence = async (user: UserInputRow): Promise<void> => {
-  if (checkPhoneExist(user.phone)) {
-    console.log("Phone number already exists");
-    const newPhone = await getUserInput({
-      label: "Choose another phone number:",
-    });
-    await handlePhoneExistence({ ...user, phone: newPhone });
+  let { phone } = user;
+
+  if (checkPhoneExist(phone)) {
+    console.log(messages.phoneExist);
+    do {
+      phone = await getUserInput({
+        label: messages.chooseAnotherPhone,
+      });
+    } while (!validatePhoneNumber(phone));
+
+    await handlePhoneExistence({ ...user, phone });
   } else {
     writeUserDataToFile(user);
   }
