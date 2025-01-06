@@ -1,0 +1,7 @@
+{
+  "userName": "Enter your name:",
+  "userPhone": "Enter your phone:",
+  "phoneExists": "Phone number already exists. Please enter a different phone number.",
+  "askForAnother": "Do you want add another contact? [y/n]",
+  "invalidPhoneNumber": "Invalid input. Please enter a valid number."
+}
