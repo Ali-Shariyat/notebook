@@ -12,12 +12,12 @@ function readFile(fileName: string) {
   }
 }
 
-const writeFile = (fileName: string, data: any) => {
+function writeFile(fileName: string, data: any) {
   try {
     writeFileSync(fileName, JSON.stringify([...users, data], null, 2), "utf-8");
     users.push(data);
   } catch (error) {}
-};
+}
 
 function isPhoneExist(phone: number): boolean {
   return users.some((user: { phone: number }) => user.phone === phone);
