@@ -3,20 +3,23 @@ import askForAnotherData from "./helper/askForAnotherData";
 import { checkPhoneExistence } from "./helper/checkPhoneExistence";
 import { FILE_NAME, writeFile } from "./helper/processFile";
 import { prompt } from "./helper/readline";
-
+interface DataRow {
+  name: string;
+  phone: null | number;
+}
 export default async function App() {
-  const name = await prompt(messages.userName);
-  let phone;
+  const data: DataRow = {
+    name: (await prompt(messages.userName)) as string,
+    phone: null,
+  };
   let isValidPhone = false;
 
   while (!isValidPhone) {
-    phone = (await prompt(messages.userPhone, {
+    data.phone = (await prompt(messages.userPhone, {
       type: "number",
     })) as number;
-    isValidPhone = checkPhoneExistence(phone);
+    isValidPhone = checkPhoneExistence(data.phone);
   }
-
-  const data = { name, phone };
   writeFile(FILE_NAME, data);
   askForAnotherData();
 }
