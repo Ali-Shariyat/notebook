@@ -2,30 +2,30 @@ import { readFileSync, writeFileSync } from "fs";
 
 const FILE_NAME = "users.json";
 
-interface UserRow {
+export interface UserRow {
   name: string;
-  phone: number;
+  phone?: number;
 }
 
-const users = readFile(FILE_NAME);
-
-function readFile(fileName: string) {
+function readFile<T>(fileName: string): T {
   try {
     return JSON.parse(readFileSync(fileName, "utf-8"));
   } catch (error) {
-    return [];
+    console.error(`Error reading file ${fileName}:`, error);
+    throw error;
   }
 }
 
-function writeFile(fileName: string, data: any) {
+function writeFile<T>(fileName: string, data: T[]): void {
   try {
-    writeFileSync(fileName, JSON.stringify([...users, data], null, 2), "utf-8");
-    users.push(data);
-  } catch (error) {}
+    writeFileSync(fileName, JSON.stringify(data, null, 2), "utf-8");
+  } catch (error) {
+    console.error(`Error writing file ${fileName}:`, error);
+  }
 }
 
-function isPhoneExist(phone: number): boolean {
-  return users.some((user: UserRow) => user.phone === phone);
+function isPhoneExist(phone: number, users: UserRow[]): boolean {
+  return users.some((user) => user.phone === phone);
 }
 
 export { readFile, writeFile, isPhoneExist, FILE_NAME };
