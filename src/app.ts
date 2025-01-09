@@ -1,4 +1,4 @@
-import messages from "./data/messages";
+import messages from "./data/messages.json";
 import askForAnotherData from "./helper/askForAnotherData";
 import { checkPhoneExistence } from "./helper/checkPhoneExistence";
 import { FILE_NAME, writeFile } from "./helper/processFile";
@@ -9,15 +9,15 @@ interface DataRow {
 }
 export default async function App() {
   const data: DataRow = {
-    name: (await prompt(messages.userName)) as string,
+    name: await prompt<string>(messages.userName),
     phone: null,
   };
   let isValidPhone = false;
 
   while (!isValidPhone) {
-    data.phone = (await prompt(messages.userPhone, {
+    data.phone = await prompt<number>(messages.userPhone, {
       type: "number",
-    })) as number;
+    });
     isValidPhone = checkPhoneExistence(data.phone);
   }
   writeFile(FILE_NAME, data);

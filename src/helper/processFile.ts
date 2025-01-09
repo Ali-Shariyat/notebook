@@ -19,8 +19,8 @@ function readFile(fileName: string) {
 
 function writeFile(fileName: string, data: any) {
   try {
-    writeFileSync(fileName, JSON.stringify([...users, data], null, 2), "utf-8");
     users.push(data);
+    writeFileSync(fileName, JSON.stringify(users, null, 2), "utf-8");
   } catch (error) {}
 }
 

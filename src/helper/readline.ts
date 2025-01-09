@@ -1,4 +1,4 @@
-import messages from "../data/messages";
+import messages from "../data/messages.json";
 import { createInterface } from "readline";
 
 const readline = createInterface({
@@ -6,10 +6,10 @@ const readline = createInterface({
   output: process.stdout,
 });
 
-export async function prompt(
+export async function prompt<T>(
   label: string,
   options: { type: "string" | "number" } = { type: "string" }
-): Promise<string | number> {
+): Promise<T> {
   while (true) {
     const input = await new Promise<string>((resolve) => {
       readline.question(label, resolve);
@@ -17,10 +17,10 @@ export async function prompt(
 
     if (options.type === "number") {
       const numberValue = parseFloat(input);
-      if (!isNaN(numberValue)) return numberValue;
+      if (!isNaN(numberValue)) return numberValue as T;
       console.log(messages.invalidPhoneNumber);
     } else {
-      return input;
+      return input as T;
     }
   }
 }

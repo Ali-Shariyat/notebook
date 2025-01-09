@@ -1,4 +1,4 @@
-import messages from "../data/messages";
+import messages from "../data/messages.json";
 import { isPhoneExist } from "./processFile";
 
 export function checkPhoneExistence(phone: number): boolean {
