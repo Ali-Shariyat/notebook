@@ -1,7 +1,7 @@
 import messages from "./data/messages.json";
 import askForAnotherData from "./helper/askForAnotherData";
 import { checkPhoneExistence } from "./helper/checkPhoneExistence";
-import { FILE_NAME, writeFile } from "./helper/processFile";
+import { FILE_NAME, save } from "./helper/processFile";
 import { prompt } from "./helper/readline";
 interface DataRow {
   name: string;
@@ -20,6 +20,6 @@ export default async function App() {
     });
     isValidPhone = checkPhoneExistence(data.phone);
   }
-  writeFile(FILE_NAME, data);
+  save(FILE_NAME, data);
   askForAnotherData();
 }

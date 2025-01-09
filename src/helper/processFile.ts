@@ -17,7 +17,7 @@ function readFile(fileName: string) {
   }
 }
 
-function writeFile(fileName: string, data: any) {
+function save(fileName: string, data: any) {
   try {
     users.push(data);
     writeFileSync(fileName, JSON.stringify(users, null, 2), "utf-8");
@@ -28,4 +28,4 @@ function isPhoneExist(phone: number): boolean {
   return users.some((user: UserRow) => user.phone === phone);
 }
 
-export { readFile, writeFile, isPhoneExist, FILE_NAME };
+export { readFile, save, isPhoneExist, FILE_NAME };
