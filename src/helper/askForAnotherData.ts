@@ -1,13 +1,15 @@
-import App from "../app";
-import messages from "../data/messages.json";
-import readline, { prompt } from "./readline";
+import { menu } from "./processUsers";
+import { prompt } from "./readline";
 
-export default async function askForAnotherData() {
-  const answer = await prompt<string>(messages.askForAnother);
+export default async function askForAnotherData(
+  message: string,
+  action: Function
+) {
+  const answer = await prompt<string>(message);
 
   if (answer.toLowerCase() === "y" || answer.toLowerCase() === "yes") {
-    App();
+    action();
   } else {
-    readline.close();
+    menu();
   }
 }

@@ -1,13 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
+import { UserRow, users } from "./processUsers";
 
 const FILE_NAME = "users.json";
-
-interface UserRow {
-  name: string;
-  phone: number;
-}
-
-const users = readFile(FILE_NAME);
 
 function readFile(fileName: string) {
   try {
@@ -17,9 +11,9 @@ function readFile(fileName: string) {
   }
 }
 
-function save(fileName: string, data: any) {
+function save(fileName: string, data: any = undefined) {
   try {
-    users.push(data);
+    if (data) users.push(data);
     writeFileSync(fileName, JSON.stringify(users, null, 2), "utf-8");
   } catch (error) {}
 }

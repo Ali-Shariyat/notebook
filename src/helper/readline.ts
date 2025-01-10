@@ -1,5 +1,8 @@
 import messages from "../data/messages.json";
 import { createInterface } from "readline";
+import inquirer from "inquirer";
+
+const { prompt: inquirerPrompt } = inquirer;
 
 const readline = createInterface({
   input: process.stdin,
@@ -11,9 +14,13 @@ export async function prompt<T>(
   options: { type: "string" | "number" } = { type: "string" }
 ): Promise<T> {
   while (true) {
-    const input = await new Promise<string>((resolve) => {
-      readline.question(label, resolve);
-    });
+    const input = await inquirerPrompt([
+      {
+        type: "input",
+        name: "item",
+        message: label,
+      },
+    ]).then((answers) => answers.item);
 
     if (options.type === "number") {
       const numberValue = parseFloat(input);
