@@ -1,5 +1,5 @@
-import { menu } from "./helper/processUsers";
+import { mainMenu } from "./helper/processUsers";
 
 export default async function App() {
-  menu();
+  mainMenu();
 }

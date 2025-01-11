@@ -5,5 +5,15 @@
   "askForAnother": "Do you want {action} another contact? [y/n]",
   "invalidPhoneNumber": "Invalid input. Please enter a valid number.",
   "chooseUser": "Choose the user index you want to change:",
-  "goodbye": "Goodbye!"
+  "chooseUserToRemove": "Choose the user index you want to remove:",
+  "userSuccessfullyRemoved": "User successfully removed.",
+  "goodbye": "Goodbye!",
+  "chooseCategoryAction": "Choose a category action:",
+  "chooseCategory": "Choose category name:",
+  "categoryExist": "Category already exists. Please choose another name.",
+  "categoryAdd": "Added successfully",
+  "chooseCategoryIndex": "Choose the category index you want to change:",
+  "chooseToRemoveCategory": "Choose the category index you want to remove:",
+  "categoryDoesNotExist": "Category does not exist.",
+  "categorySuccessfullyRemoved": "Category successfully removed."
 }

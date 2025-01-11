@@ -1,5 +1,4 @@
 import { readFileSync, writeFileSync } from "fs";
-import { UserRow, users } from "./processUsers";
 
 const FILE_NAME = "users.json";
 
@@ -11,15 +10,17 @@ function readFile(fileName: string) {
   }
 }
 
-function save(fileName: string, data: any = undefined) {
+interface SaveRow {
+  fileName: string;
+  data?: any;
+  storage: any[];
+}
+
+function save({ fileName, data, storage }: SaveRow) {
   try {
-    if (data) users.push(data);
-    writeFileSync(fileName, JSON.stringify(users, null, 2), "utf-8");
+    if (data) storage.push(data);
+    writeFileSync(fileName, JSON.stringify(storage, null, 2), "utf-8");
   } catch (error) {}
 }
 
-function isPhoneExist(phone: number): boolean {
-  return users.some((user: UserRow) => user.phone === phone);
-}
-
-export { readFile, save, isPhoneExist, FILE_NAME };
+export { readFile, save, FILE_NAME };

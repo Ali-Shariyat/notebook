@@ -1,5 +1,5 @@
 import messages from "../data/messages.json";
-import { isPhoneExist } from "./processFile";
+import { isPhoneExist } from "./processUsers";
 
 export function checkPhoneExistence(phone: number): boolean {
   const phoneExist = isPhoneExist(phone);
