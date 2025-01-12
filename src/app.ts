@@ -1,4 +1,4 @@
-import { mainMenu } from "./helper/processUsers";
+import mainMenu from "./mainMenu";
 
 export default async function App() {
   mainMenu();
