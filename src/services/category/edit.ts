@@ -6,7 +6,7 @@ import {
   inputCategoryName,
   listCategories,
 } from "./utils";
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import { write } from "../manageFile/write";
 import { categoryMenu } from "./menu";
 

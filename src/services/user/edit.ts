@@ -1,5 +1,5 @@
 import askForAnotherData from "../../helper/askForAnotherData";
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import {
   findUserByIndex,
   inputPhone,

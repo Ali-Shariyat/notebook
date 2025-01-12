@@ -1,5 +1,5 @@
 import askForAnotherData from "../../helper/askForAnotherData";
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import { inputName, inputPhone, UserRow, users, USERS_FILE } from "./utils";
 import { write } from "../manageFile/write";
 import { inputCategory } from "../category/utils";

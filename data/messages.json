@@ -13,6 +13,7 @@
   "categoryExist": "Category already exists. Please choose another name.",
   "categoryAdd": "Added successfully",
   "chooseCategoryIndex": "Choose the category index you want to change:",
+  "chooseCategoryToApply": "choose category index to apply",
   "chooseToRemoveCategory": "Choose the category index you want to remove:",
   "categoryDoesNotExist": "Category does not exist.",
   "categorySuccessfullyRemoved": "Category successfully removed."

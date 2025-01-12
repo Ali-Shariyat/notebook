@@ -1,4 +1,4 @@
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import { categories, CATEGORIES_FILE, inputCategoryName } from "./utils";
 import { write } from "../manageFile/write";
 import { categoryMenu } from "./menu";

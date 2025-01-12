@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import { addCetegory } from "./add";
 import { editCategory } from "./edit";
 import { removeCategory } from "./remove";

@@ -1,7 +1,7 @@
 import mainMenu from "../../mainMenu";
 import { logUsers, users, USERS_FILE } from "./utils";
 import prompt from "../../helper/prompt";
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import { write } from "../manageFile/write";
 
 async function remove() {

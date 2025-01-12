@@ -1,5 +1,5 @@
 import prompt from "../../helper/prompt";
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import { categories, CATEGORIES_FILE, listCategories } from "./utils";
 import { write } from "../manageFile/write";
 import { categoryMenu } from "./menu";

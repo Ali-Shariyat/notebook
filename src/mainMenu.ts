@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import messages from "./data/messages.json";
+import messages from "../data/messages.json";
 import { categoryMenu } from "./services/category/menu";
 import { userMenu } from "./services/user/menu";
 export default function mainMenu() {

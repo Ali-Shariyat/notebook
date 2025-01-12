@@ -1,4 +1,4 @@
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import prompt from "../../helper/prompt";
 import { findCategoryById } from "../category/utils";
 import { read } from "../manageFile/read";

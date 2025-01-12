@@ -1,5 +1,5 @@
 import prompt from "../../helper/prompt";
-import messages from "../../data/messages.json";
+import messages from "../../../data/messages.json";
 import { read } from "../manageFile/read";
 
 export const CATEGORIES_FILE = "categories.json";
@@ -26,7 +26,7 @@ export function listCategories() {
 
 export async function inputCategory() {
   listCategories();
-  const categoryIndex = await prompt<number>("choose category index to apply", {
+  const categoryIndex = await prompt<number>(messages.chooseCategoryToApply, {
     type: "number",
   });
   const category = categories.find((_, index) => categoryIndex === index);
