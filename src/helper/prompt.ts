@@ -1,26 +1,20 @@
 import messages from "../data/messages.json";
-import { createInterface } from "readline";
 import inquirer from "inquirer";
 
-const { prompt: inquirerPrompt } = inquirer;
-
-const readline = createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-export async function prompt<T>(
+async function prompt<T>(
   label: string,
   options: { type: "string" | "number" } = { type: "string" }
 ): Promise<T> {
   while (true) {
-    const input = await inquirerPrompt([
-      {
-        type: "input",
-        name: "item",
-        message: label,
-      },
-    ]).then((answers) => answers.item);
+    const input = await inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "item",
+          message: label,
+        },
+      ])
+      .then((answers) => answers.item);
 
     if (options.type === "number") {
       const numberValue = parseFloat(input);
@@ -32,4 +26,4 @@ export async function prompt<T>(
   }
 }
 
-export default readline;
+export default prompt;

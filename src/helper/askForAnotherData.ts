@@ -1,5 +1,5 @@
-import { mainMenu } from "./processUsers";
-import { prompt } from "./readline";
+import mainMenu from "../mainMenu";
+import prompt from "./prompt";
 
 export default async function askForAnotherData(
   message: string,
