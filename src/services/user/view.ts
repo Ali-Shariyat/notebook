@@ -1,9 +1,9 @@
-import mainMenu from "../../mainMenu";
+import { userMenu } from "./menu";
 import { logUsers } from "./utils";
 
 function view() {
   logUsers();
-  mainMenu();
+  userMenu();
 }
 
 export { view as viewUsers };
