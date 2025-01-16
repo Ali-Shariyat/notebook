@@ -16,5 +16,6 @@
   "chooseCategoryToApply": "choose category index to apply",
   "chooseToRemoveCategory": "Choose the category index you want to remove:",
   "categoryDoesNotExist": "Category does not exist.",
-  "categorySuccessfullyRemoved": "Category successfully removed."
+  "categorySuccessfullyRemoved": "Category successfully removed.",
+  "emptyList": "{name} list is empty please add an item."
 }

@@ -1,8 +1,10 @@
 import askForAnotherData from "../../helper/askForAnotherData";
 import messages from "../../../data/messages.json";
 import { inputName, inputPhone, UserRow, users, USERS_FILE } from "./utils";
-import { write } from "../manageFile/write";
 import { inputCategory } from "../category/utils";
+import { insertUser } from "../../api/users/insert";
+import { write } from "../manageFile/write";
+import saveOnDatabase from "../../configs/saveOnDatabase";
 
 async function add() {
   const data: UserRow = {
@@ -11,10 +13,14 @@ async function add() {
     category: await inputCategory(),
   };
   users.push(data);
-  write({
-    fileName: USERS_FILE,
-    data: users,
-  });
+
+  if (saveOnDatabase) insertUser(data as any);
+  else
+    write({
+      fileName: USERS_FILE,
+      data: users,
+    });
+
   const label = messages.askForAnother.replace("{action}", "add");
   askForAnotherData(label, add);
 }

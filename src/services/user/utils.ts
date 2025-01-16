@@ -1,17 +1,33 @@
+import { usersList } from "../../api/users/list";
 import messages from "../../../data/messages.json";
 import prompt from "../../helper/prompt";
 import { findCategoryById } from "../category/utils";
+import saveOnDatabase from "../../configs/saveOnDatabase";
 import { read } from "../manageFile/read";
 
 export const USERS_FILE = "users.json";
 
 export interface UserRow {
+  id?: number;
   name?: string;
   phone?: number;
   category: number;
 }
 
-export let users: UserRow[] = read({ fileName: USERS_FILE });
+export let users: UserRow[];
+
+export async function getUsers() {
+  try {
+    if (saveOnDatabase) users = (await usersList()) as any;
+    else users = read({ fileName: USERS_FILE });
+  } catch (err) {
+    console.error("Error loading users:", err);
+  }
+}
+
+export function isUsersEmpty() {
+  return !users.length;
+}
 
 export function findUserByIndex(index: number) {
   return users.find((_, _index) => index === _index);
@@ -24,7 +40,7 @@ export function isPhoneExist(phone: number): boolean {
 export function logUsers() {
   const _users = users.map((item) => ({
     ...item,
-    category: findCategoryById(item.category)?.name,
+    category: findCategoryById(item.category)?.name || "_____",
   }));
   console.table(_users, ["name", "phone", "category"]);
 }

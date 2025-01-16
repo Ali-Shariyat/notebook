@@ -1,6 +1,8 @@
 import prompt from "../../helper/prompt";
 import messages from "../../../data/messages.json";
 import { read } from "../manageFile/read";
+import saveOnDatabase from "../../configs/saveOnDatabase";
+import { categoriesList } from "../../api/categories/list";
 
 export const CATEGORIES_FILE = "categories.json";
 
@@ -9,7 +11,20 @@ interface CategoryRow {
   name: string;
 }
 
-export let categories: CategoryRow[] = read({ fileName: CATEGORIES_FILE });
+export let categories: CategoryRow[] = [];
+
+export async function getCategories() {
+  try {
+    if (saveOnDatabase) categories = (await categoriesList()) as any;
+    else categories = read({ fileName: CATEGORIES_FILE });
+  } catch (err) {
+    console.error("Error loading users:", err);
+  }
+}
+
+export function isCategoriesEmpty() {
+  return !categories.length;
+}
 
 export function isCategoryExist(value: string) {
   return categories.some(({ name }) => value === name);

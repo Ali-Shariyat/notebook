@@ -2,3 +2,4 @@ node_modules
 build
 users.json
 categories.json
+database/database.db
