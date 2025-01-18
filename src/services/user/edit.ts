@@ -1,26 +1,21 @@
 import askForAnotherData from "../../helper/askForAnotherData";
 import messages from "../../../data/messages.json";
-import {
-  findUserByIndex,
-  inputPhone,
-  isUsersEmpty,
-  logUsers,
-  users,
-  USERS_FILE,
-} from "./utils";
 import prompt from "../../helper/prompt";
-import { inputCategory } from "../category/utils";
-import { updateUser } from "../../api/users/update";
-import saveOnDatabase from "../../configs/saveOnDatabase";
-import { write } from "../manageFile/write";
 import { userMenu } from "./menu";
+import showUsersList from "./utils/showUserList";
+import { users, USERS_TABLE_NAME } from "./utils/data";
+import inputPhone from "./utils/inputs/inputPhone";
+import findUserByIndex from "./utils/findUserByIndex";
+import isUsersEmpty from "./utils/isUsersEmpty";
+import { updateData } from "../databaseEngine/update";
+import { inputCategory } from "../category/utils/inputs/inputCategory";
 
 async function edit() {
   if (isUsersEmpty()) {
-    console.log(messages.emptyList.replace('{name}','users'));
+    console.log(messages.emptyList.replace("{name}", "users"));
     return userMenu();
   }
-  logUsers();
+  showUsersList();
   const userIndex = await prompt<number>(messages.chooseUser, {
     type: "number",
   });
@@ -29,13 +24,8 @@ async function edit() {
     user.name = await prompt<string>(messages.userName);
     user.phone = await inputPhone();
     user.category = await inputCategory();
-    if (saveOnDatabase) updateUser(user as any);
-    else
-      write({
-        fileName: USERS_FILE,
-        data: users,
-      });
-    logUsers();
+    updateData(USERS_TABLE_NAME, user, users);
+    showUsersList();
     const label = messages.askForAnother.replace("{action}", "edit");
     askForAnotherData(label, edit);
   }

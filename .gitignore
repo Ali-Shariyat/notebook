@@ -1,5 +1,5 @@
 node_modules
 build
-users.json
-categories.json
+database/users.json
+database/categories.json
 database/database.db

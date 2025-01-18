@@ -1,8 +1,8 @@
 import { categoryMenu } from "./menu";
-import { listCategories } from "./utils";
+import showCategoriesList from "./utils/showCategoriesList";
 
 async function view() {
-  listCategories();
+  showCategoriesList();
   categoryMenu();
 }
 

@@ -1,8 +1,8 @@
 import { userMenu } from "./menu";
-import { logUsers } from "./utils";
+import showUsersList from "./utils/showUserList";
 
 function view() {
-  logUsers();
+  showUsersList();
   userMenu();
 }
 

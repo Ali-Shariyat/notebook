@@ -1,23 +1,18 @@
 import prompt from "../../helper/prompt";
 import messages from "../../../data/messages.json";
-import {
-  categories,
-  CATEGORIES_FILE,
-  findCategoryByIndex,
-  isCategoriesEmpty,
-  listCategories,
-} from "./utils";
-import { write } from "../manageFile/write";
 import { categoryMenu } from "./menu";
-import { removeCategory } from "../../api/categories/remove";
-import saveOnDatabase from "../../configs/saveOnDatabase";
+import isCategoriesEmpty from "./utils/isCategoriesEmpty";
+import showCategoriesList from "./utils/showCategoriesList";
+import { categories, CATEGORIES_TABLE_NAME } from "./utils/data";
+import findCategoryByIndex from "./utils/findCategoryByIndex";
+import { removeData } from "../databaseEngine/remove";
 
 async function remove() {
   if (isCategoriesEmpty()) {
-    console.log(messages.emptyList.replace('{name}','categories'));
+    console.log(messages.emptyList.replace("{name}", "categories"));
     return categoryMenu();
   }
-  listCategories();
+  showCategoriesList();
   const categoryIndex = await prompt<number>(messages.chooseToRemoveCategory, {
     type: "number",
   });
@@ -26,8 +21,10 @@ async function remove() {
   );
   const currentCategory = findCategoryByIndex(categoryIndex);
   categories.splice(0, categories.length, ...filtredCategory);
-  if (saveOnDatabase) removeCategory({ id: currentCategory?.id } as any);
-  else write({ fileName: CATEGORIES_FILE, data: categories });
+  if (currentCategory && currentCategory.id) {
+    categories.splice(0, categories.length, ...filtredCategory);
+    removeData(CATEGORIES_TABLE_NAME, currentCategory?.id, categories);
+  }
   console.log(messages.categorySuccessfullyRemoved);
   categoryMenu();
 }

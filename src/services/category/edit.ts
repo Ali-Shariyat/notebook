@@ -1,24 +1,19 @@
 import prompt from "../../helper/prompt";
-import {
-  categories,
-  CATEGORIES_FILE,
-  findCategoryByIndex,
-  inputCategoryName,
-  isCategoriesEmpty,
-  listCategories,
-} from "./utils";
 import messages from "../../../data/messages.json";
-import { write } from "../manageFile/write";
 import { categoryMenu } from "./menu";
-import saveOnDatabase from "../../configs/saveOnDatabase";
-import { updateCategory } from "../../api/categories/update";
+import isCategoriesEmpty from "./utils/isCategoriesEmpty";
+import showCategoriesList from "./utils/showCategoriesList";
+import { updateData } from "../databaseEngine/update";
+import inputCategoryName from "./utils/inputs/inputCategoryName";
+import { categories, CATEGORIES_TABLE_NAME } from "./utils/data";
+import findCategoryByIndex from "./utils/findCategoryByIndex";
 
 async function edit() {
   if (isCategoriesEmpty()) {
-    console.log(messages.emptyList.replace('{name}','categories'));
+    console.log(messages.emptyList.replace("{name}", "categories"));
     return categoryMenu();
   }
-  listCategories();
+  showCategoriesList();
   const categoryIndex = await prompt<number>(messages.chooseCategoryIndex, {
     type: "number",
   });
@@ -26,13 +21,8 @@ async function edit() {
 
   if (category) {
     category.name = await inputCategoryName();
-    if (saveOnDatabase) updateCategory(category as any);
-    else
-      write({
-        fileName: CATEGORIES_FILE,
-        data: categories,
-      });
-    listCategories();
+    updateData(CATEGORIES_TABLE_NAME, category, categories);
+    showCategoriesList();
     categoryMenu();
   } else {
     console.log(messages.categoryDoesNotExist);
