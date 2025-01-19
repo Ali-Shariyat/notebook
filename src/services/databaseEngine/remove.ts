@@ -1,7 +1,6 @@
 import { writeJson } from "../../helper/file/write";
-import { removeCategory } from "../../repositories/sqlite/categories/remove";
-import { removeUser } from "../../repositories/sqlite/users/remove";
 import isSqlite from "./utils/sqlite/isSqlite";
+import { removeDataFromSqlite } from "./utils/sqlite/remove";
 
 const remove = (
   table: string,
@@ -9,8 +8,7 @@ const remove = (
   list: any[]
 ): void | Promise<any> => {
   if (isSqlite()) {
-    if (table === "users") return removeUser({ id });
-    if (table === "categories") return removeCategory({ id });
+    removeDataFromSqlite(table, id);
   } else {
     writeJson({ fileName: `database/${table}.json`, data: list });
   }
