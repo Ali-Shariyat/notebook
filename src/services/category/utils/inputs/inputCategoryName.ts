@@ -8,7 +8,9 @@ export default async function inputCategoryName() {
   while (!isExist) {
     name = await prompt<string>(messages.chooseCategory);
     isExist = !isCategoryExist(name);
-    console.log(messages.categoryExist);
+    if (!isExist) {
+      console.log(messages.categoryExist);
+    }
   }
   return name;
 }
