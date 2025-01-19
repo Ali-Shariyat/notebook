@@ -1,9 +1,9 @@
 import { categoriesList } from "../../../../repositories/sqlite/categories/list";
 import { usersList } from "../../../../repositories/sqlite/users/list";
 
-const read = (fileName: string): void | Promise<any> => {
-  if (fileName === "users") return usersList();
-  if (fileName === "categories") return categoriesList();
+const read = (table: string): void | Promise<any> => {
+  if (table === "users") return usersList();
+  if (table === "categories") return categoriesList();
 };
 
 export { read as readDataFromSqlite };
