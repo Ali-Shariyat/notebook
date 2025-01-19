@@ -3,3 +3,4 @@ build
 database/users.json
 database/categories.json
 database/database.db
+.env
